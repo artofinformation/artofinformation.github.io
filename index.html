@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The art of information</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Mind & Message: Information-theoretic approaches to psychology & the arts — course homepage" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap" rel="stylesheet">
+
+  <script src="https://kit.fontawesome.com/6113acda8c.js" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+
+  <body>
+
+    <div class="blobs"></div>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <h1 class="title">The art of information</h1>
+        <div class="subtitle">Information-theoretic approaches to psychology and art</div>
+        <div class="tagline">JHU Intersession 2026</div>
+
+        <div class="pillbar">
+          <!-- your pills here -->
+          <a class="pill" href="#content"><i class="fa-solid fa-circle-info"></i>About</a>
+          <a class="pill" href="#classes"><i class="fa-solid fa-pencil"></i>Classes</a>
+          <a class="pill" href="files/syllabus.pdf" target="_blank"><i class="fa-solid fa-file"></i>Syllabus</a>
+          <a class="pill" href="mailto:tboger1@jhu.edu"><i class="fa-solid fa-envelope"></i>Contact</a>
+          <a class="pill" href="canvas.jhu.edu"><i class="fa-solid fa-building-columns"></i>Canvas</a>
+        </div>
+      </div>
+
+      <a href="#content" class="scroll-down" aria-label="Scroll to content">
+        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </a>
+    </section>
+
+
+  <main id="content">
+    <section class="grid" id="syllabus">
+      <div class="left">
+
+        <div id="who" class="card instructor">
+          <h3 class="card-title">Who</h3>
+          <div class="instructor-body">
+            <img class="avatar" src="images/tal.jpg" alt="Instructor portrait" />
+            <div>
+              <h3>Tal Boger</h3>
+              <p>Ph.D. candidate, Psychological & Brain Sciences.</p>
+
+              <div class="icon-links" style="margin-top:.5rem; display:flex; gap:.6rem; flex-wrap:wrap;">
+                <a href="mailto:tboger1@jhu.edu" class="pill" aria-label="Email">
+                  <i class="fa-solid fa-envelope"></i> Email
+                </a>
+                <a href="https://talboger.github.io/" target="_blank" rel="noopener" class="pill" aria-label="Website">
+                  <i class="fa-solid fa-globe"></i> Website
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="when_where" class="card about" style="margin-top:1rem">
+          <h3 class="card-title">When & where</h3>
+          <h4><strong>Class:</strong> MTWTF, 1:00-2:15pm @ Gilman 400.</h4>
+          <h4><strong>Office hours:</strong> Wednesdays, 3:00-4:00pm @ Ames 101 (and by appointment).</h4>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="card about">
+          <h3 class="card-title">What</h3>
+          <p>Why do some songs get stuck in your head? Why are certain things easier to remember than others? Does Jackson Pollock paint “randomly” (and if so, what does that even mean)? These questions contain both psychological components and aesthetic components. In this course, we’ll unify these two kinds of questions through information theory — the statistical and mathematical principles underlying how we process, represent, and use information. We will explore how tools and principles from information theory can help us understand our minds and our aesthetic experiences. This course will contain an introduction to information theory, a discussion of its application in psychology and art, and an analysis of scholarly literature and popular media on these topics.</p>
+        </div>
+
+        <div class="card about">
+          <h3 class="card-title">Why</h3>
+          <p>Minds are information-processing systems. So, it turns out that principles from information theory underlie much of how we see, hear, and process information. When information theory and psychology come together — to study each other, and to study art — awesome things happen. Like <a href="https://pudding.cool/2017/05/song-repetition/" target="_blank">this</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="classes" style="margin-top:1.4rem">
+      <h2 class="section-heading">Classes</h2>
+      <div class="classes" id="classGrid"></div>
+    </section>
+  </main>
+
+  <script>
+  // ---------------------------------------
+  // Button presets
+  // ---------------------------------------
+    const BUTTON_PRESETS = {
+      slides:        { label: "Slides",   icon: "fa-solid fa-images",    target: "_blank", rel: "noopener" },
+      todo:          { label: "To do (before class)", icon: "fa-solid fa-list", type: "todo" },
+      todo_readings: { label: "Readings", icon: "fa-solid fa-book-open", type: "todo" },
+      todo_blank:    { type: "todo" }
+    };
+
+    // ---------------------------------------
+    // Your classes (example data)
+    // ---------------------------------------
+    const CLASSES = [
+      {
+        day: 1,
+        title: "Introductions!",
+        date: "Jan 6",
+        buttons: [
+          { preset: "todo", content: `Read the syllabus (available <a href="files/syllabus.pdf" target="_blank">here</a>)!` }
+        ]
+      },
+      
+    ];
+
+    // ---------------------------------------
+    // Utils
+    // ---------------------------------------
+    function resolveButton(btn = {}) {
+      const base = btn.preset && BUTTON_PRESETS[btn.preset] ? BUTTON_PRESETS[btn.preset] : {};
+      return { ...base, ...btn }; // data-first: user props override preset
+    }
+
+    function renderIcon(icon) {
+      if (!icon) return "";
+      if (typeof icon === "string" && icon.trim().startsWith("<")) return icon; // raw SVG string
+      if (/^fa(-|\s)/.test(icon) || /\bfa-/.test(icon)) return `<i class="${icon}" aria-hidden="true"></i>`;
+      return `<span aria-hidden="true">${icon}</span>`; // emoji/text
+    }
+
+    // ---------------------------------------
+    // Render
+    // ---------------------------------------
+    function renderClasses(classes) {
+      const grid = document.getElementById('classGrid');
+      grid.innerHTML = '';
+
+      classes.forEach(({ day, title, date, buttons = [] }) => {
+        const card = document.createElement('article');
+        card.className = 'card class-card';
+
+        // build link/todo items
+        const parts = (buttons || [])
+          .map(resolveButton)
+          .map((b) => {
+            const label = b.label || "Link";
+            const icon  = renderIcon(b.icon);
+
+            // --- Todo disclosure items ---
+            if (b.type === "todo" && b.content) {
+              const isOpen  = b.open ? " open" : "";
+              const isMain  = b.preset === "todo";              // ONLY the pure "todo" preset
+              const dClass  = `todo${isOpen}${isMain ? " todo-main" : ""}`;
+
+              return `
+                <details class="${dClass}">
+                  <summary class="link todo-toggle">
+                    ${icon} ${label}
+                  </summary>
+                  <div class="todo-bubble">
+                    <div class="todo-bubble-inner">${b.content}</div>
+                  </div>
+                </details>
+              `;
+            }
+
+            // --- Regular link items ---
+            if (b.href) {
+              const target = b.target ? ` target="${b.target}"` : "";
+              const rel    = b.rel ? ` rel="${b.rel}"` : (b.target === "_blank" ? ` rel="noopener"` : "");
+              const dl     = b.download ? ` download` : "";
+              const aria   = b.aria ? ` aria-label="${b.aria}"` : ` aria-label="${label} for day ${day}"`;
+              const className = `link${b.className ? " " + b.className : ""}`;
+              return `<a class="${className}" href="${b.href}"${target}${rel}${dl}${aria}>${icon} ${label}</a>`;
+            }
+
+            return "";
+          })
+          .filter(Boolean)
+          .join('');
+
+        card.innerHTML = `
+          <div class="class-head">
+            <div>
+              <div class="day">Day ${day} (${date})</div>
+              <div class="class-title">${title}</div>
+            </div>
+          </div>
+          ${parts ? `<div class="linkrow">${parts}</div>` : ``}
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    // ---------------------------------------
+    // Boot
+    // ---------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      renderClasses(CLASSES);
+      // No custom click handler needed — <details>/<summary> toggles natively
+    });
+  </script>
+
+</body>
+</html>
