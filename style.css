@@ -481,3 +481,156 @@ details.todo-main > summary:hover {
           mask: url('https://www.svgrepo.com/show/501124/canvas-logo.svg') no-repeat center / contain;
   vertical-align: -2px;                           /* baseline align with text */
 }
+
+/* =========================================
+   MOBILE / PORTRAIT TUNING
+   ========================================= */
+@media screen and (orientation: portrait) {
+
+  /* Make rems scale sanely on narrow viewports */
+  html {
+    /* 14–18px range, grows with viewport width */
+    font-size: clamp(14px, 3.6vw, 18px);
+  }
+
+  /* Use dynamic viewport height to avoid address-bar jumps */
+  .hero {
+    min-height: 100dvh;
+    padding: 1.6rem 1rem 3.6rem; /* breathing room + space for arrow */
+  }
+
+  /* Typographic scale */
+  .title {
+    font-size: clamp(2.2rem, 8.5vw, 3.2rem);
+    line-height: 1.2;
+  }
+  .subtitle {
+    font-size: clamp(1.05rem, 4.2vw, 1.25rem);
+    max-width: 36ch;
+  }
+  .tagline {
+    font-size: 0.95rem;
+  }
+
+  /* Scroll cue comfortable placement on shorter screens */
+  .scroll-down {
+    bottom: 22px;
+    font-size: 22px;
+  }
+
+  /* Pill bar: stack on small screens; larger tap targets */
+  .pillbar {
+    gap: .5rem;
+    padding: .2rem 0 .4rem;
+  }
+  .pill {
+    font-size: 0.95rem;
+    padding: .6rem .9rem;
+    line-height: 1.1;
+  }
+
+  /* Main container padding */
+  main {
+    margin: .6rem auto 3.5rem;
+    padding: 0 .8rem 3rem;
+  }
+
+  /* Grid collapses to single column */
+  .grid {
+    grid-template-columns: 1fr;
+    gap: .9rem;
+  }
+  .left, .right { grid-column: 1 / -1; }
+
+  /* Cards get tighter padding and smaller headings */
+  .card { margin-bottom: .8rem; }
+  .card.instructor { padding: .9rem; }
+  .card-title {
+    font-size: clamp(1.6rem, 6.4vw, 2.1rem);
+    margin-bottom: .8rem;
+  }
+
+  /* Instructor block: stack image over text */
+  .instructor-body {
+    align-items: flex-start;
+    gap: .8rem;
+  }
+  .avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 14px;
+  }
+
+  /* “When & where” sizing */
+  .about { padding: .9rem; }
+  .about h4 {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  /* Classes section */
+  .section-heading {
+    margin: 2.2rem 0 1.4rem;
+    font-size: clamp(1.8rem, 7vw, 2.2rem);
+  }
+  .section-heading::after {
+    width: 9rem;
+    margin-top: .6rem;
+  }
+
+  .classes {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: .8rem;
+  }
+
+  .class-card {
+    padding: .9rem;
+    min-height: auto;
+  }
+
+  .class-head { gap: .6rem; }
+  .day       { font-size: .95rem; }
+  .class-title {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .linkrow {
+    gap: .45rem;
+    margin-top: .55rem;
+  }
+  .link,
+  details.todo > summary {
+    font-size: .95rem;
+    padding: .5rem .6rem;
+    border-radius: 10px;
+  }
+  details.todo-main > summary {
+    padding: .8rem .95rem;
+    border-radius: 12px;
+  }
+
+  /* Keep todo bubble inside viewport and reduce animation distance */
+  .todo-bubble {
+    max-width: 88vw;
+    transition: max-height .22s ease, opacity .18s ease;
+  }
+  .todo-bubble-inner {
+    padding: .75rem .8rem;
+  }
+
+  /* Backdrop blobs: shrink/soften on phones so they don’t overpower */
+  .blobs {
+    inset: -40vmax;
+    filter: blur(50px);
+    opacity: 0.7;
+    animation-duration: 65s;
+  }
+}
+
+/* Extra safety for very narrow devices (<=360px) */
+@media screen and (orientation: portrait) and (max-width: 360px) {
+  .pill { font-size: .9rem; }
+  .link, details.todo > summary { font-size: .9rem; }
+  .avatar { width: 96px; height: 96px; }
+}
