@@ -415,6 +415,7 @@ details.todo[open] .todo-bubble {
 .class-card { overflow: visible; }
 .linkrow details.todo {
   display: inline-block;
+  flex-basis: 100%;
 }
 .linkrow details.todo.todo-main{
   flex-basis: 100%;
@@ -425,7 +426,7 @@ details.todo[open] .todo-bubble {
   list-style: none;         /* hide default marker in some browsers */
 }
 details.todo > summary {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: .5rem;
   font-weight: 600;
