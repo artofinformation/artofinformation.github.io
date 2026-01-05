@@ -99,7 +99,7 @@
   // Button presets
   // ---------------------------------------
     const BUTTON_PRESETS = {
-      slides:        { label: "Slides",   icon: "fa-solid fa-images",    target: "_blank", rel: "noopener" },
+      slides:        { label: "Slides",   icon: "fa-solid fa-images",    target: "_blank", rel: "noopener", className: "slides-link"},
       todo:          { label: "To do (before class)", icon: "fa-solid fa-list", type: "todo" },
       todo_readings: { label: "Readings", icon: "fa-solid fa-book-open", type: "todo" },
       todo_blank:    { type: "todo" }
@@ -114,7 +114,8 @@
         title: "Introductions!",
         date: "Jan 5",
         buttons: [
-          { preset: "todo", content: `Read the syllabus (available <a href="files/syllabus.pdf" target="_blank">here</a>)!` }
+          { preset: "todo", content: `Read the syllabus (available <a href="files/syllabus.pdf" target="_blank">here</a>)!` },
+          { preset: "slides", href: "files/slides/Slides_01_05.pdf", label: "Slides" },
         ]
       },
 
@@ -124,6 +125,7 @@
         date: "Jan 6",
         buttons: [
           { preset: "todo_readings", content: `Read Chapter 1 of <i>The Information: A history, a theory, a flood</i> by James Gleick, available <a href="files/readings/02_Gleick.pdf" target="_blank">here</a>.`},
+          { preset: "slides", href: "files/slides/Slides_01_06.pdf", label: "Slides" },
           { preset: "todo", content: `Reading response (available <a href="https://jhu.instructure.com/courses/116130/assignments/1156646" target="_blank">here</a>).`}
         ]
       },
